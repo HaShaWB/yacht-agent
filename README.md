@@ -1,13 +1,9 @@
 # Yacht-Agent
-Yacht Game Agent Based on Reinforcement Learning
-
----
 
 Yacht-Agent is a game agent based on Reinforcement Learning. It implements the Yacht game environment and designs/trains an agent that interacts with the environment. This repository focuses on studying Reinforcement Learning by training a Yacht agent.
 
 Yacht is suitable for Reinforcement Learning due to its probabilistic nature involving dice and a clear scoring system. Additionally, its popularity, evidenced by many streamers playing it, makes it a great subject for RL study. The rules of Yacht are as follows.
 
----
 
 ## About Yacht
 

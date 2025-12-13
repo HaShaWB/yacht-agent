@@ -4,7 +4,7 @@ from typing import NamedTuple, Tuple
 
 import jax
 import jax.numpy as jnp
-from jax import jit, vmap
+from jax import jit
 
 
 class YachtState(NamedTuple):
@@ -64,7 +64,7 @@ def roll_dice(state: YachtState, keep_mask: jnp.ndarray) -> YachtState:
     new_dices = jax.random.randint(sub_key, (5, ), 1, 7)
     dice = jnp.where(keep_mask, state.dices, new_dices)
     
-    return state.replace(
+    return state._replace(
         dices=dice,
         rolls_left=state.rolls_left - 1,
         key=key
@@ -181,7 +181,7 @@ def step(state: YachtState, action: int) -> Tuple[YachtState, int, bool]:
         category_score = calculate_scores(state.dices)[action - 32]
         new_category_scores = state.category_scores.at[action - 32].set(category_score)
         
-        new_state = state.replace(
+        new_state = state._replace(
             dices=jax.random.randint(sub_key, (5, ), 1, 7),
             category_scores=new_category_scores,
             turn=state.turn + 1,
@@ -192,7 +192,7 @@ def step(state: YachtState, action: int) -> Tuple[YachtState, int, bool]:
 
     def invalid_action() -> Tuple[YachtState, int, bool]:
         # Penalty for invalid action and end game
-        return state.replace(turn=12), -100, True
+        return state._replace(turn=12), -100, True
 
     def try_reroll() -> Tuple[YachtState, int, bool]:
         return jax.lax.cond(

@@ -15,6 +15,16 @@ class YachtState(NamedTuple):
     key: jax.random.PRNGKey
 
 
+MAX_CATEGORY_SCORE = jnp.array([
+    5, 10, 15, 20, 25, 30, # upper
+    30, # choice
+    30, # 4 of a kind
+    30, # full house
+    15, # small straight
+    30, # large straight
+    50, # yacht
+])
+
 @jit
 def reset(key: jax.random.PRNGKey) -> YachtState:
     """
@@ -88,7 +98,7 @@ def calculate_scores(dice: jnp.ndarray) -> jnp.ndarray:
 
     # Full House: Sum of all dice if 3 of one number, 2 of another
     is_full_house = (jnp.any(counts == 3) & jnp.any(counts == 2))
-    full_house_score = jnp.where(is_full_house, 25, 0)
+    full_house_score = jnp.where(is_full_house, jnp.sum(dice), 0)
 
     # Mask for existence of each die value
     dice_exists = counts >= 1

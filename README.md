@@ -103,4 +103,9 @@ The Yacht game in this Yacht-Agent follows the rules of Nintendo's [Clubhouse Ga
 </table>
 
 ## Dev Logs
-1. [Yacht Game Environment](dev_logs/01_yacht_game_environment.md)
+
+1. [Yacht Game Environment](<dev_logs/01_yacht game environment.md>)
+
+2. [Yacht game to Gymnax](<dev_logs/02_yacht game to gymnax.md>)
+
+3. [Yacht Agent - REINFORCE](<dev_logs/03_yacht agent - REINFORCE.md>)
